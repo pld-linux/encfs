@@ -2,7 +2,7 @@ Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
 Version:	1.2.0
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://arg0.net/users/vgough/download/%{name}-%{version}-2.tgz
@@ -10,6 +10,9 @@ Source0:	http://arg0.net/users/vgough/download/%{name}-%{version}-2.tgz
 URL:		http://arg0.net/users/vgough/encfs.html
 BuildRequires:	libfuse-devel >= 2.2
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	pkgconfig
+BuildRequires:	rlog-devel
+Requires:	fusermount > 2.2
 Requires:	rlog >= 1.3
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,9 +45,13 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
+%attr(755,root,adm) %{_bindir}/encfs*
+%{_mandir}/man1/*.1*
