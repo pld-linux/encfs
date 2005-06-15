@@ -8,11 +8,13 @@ Group:		Applications/System
 Source0:	http://arg0.net/users/vgough/download/%{name}-%{version}-2.tgz
 # Source0-md5:	10a7fd97006a2b2f4f0347cd85048204
 URL:		http://arg0.net/users/vgough/encfs.html
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libfuse-devel >= 2.2
+BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pkgconfig
 BuildRequires:	rlog-devel
-Requires:	fusermount > 2.2
 Requires:	rlog >= 1.3
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,6 +37,11 @@ plików. Jest podobny do CFS-a, ale nie u¿ywa NFS-a.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--enable-debug=no
 %{__make}
@@ -45,7 +52,13 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# No public headers => no need for devel files
+rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %find_lang %{name}
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,5 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
-%attr(755,root,adm) %{_bindir}/encfs*
+%attr(755,root,root) %{_bindir}/encfs*
+%attr(755,root,root) %{_libdir}/*.so.*
 %{_mandir}/man1/*.1*
