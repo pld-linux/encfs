@@ -1,3 +1,4 @@
+# TODO: duplicated locales (es vs es_ES, fr vs fr_FR)
 Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
@@ -57,15 +58,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang %{name}
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/encfs*
-%attr(755,root,root) %{_libdir}/*.so.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{_mandir}/man1/*.1*
