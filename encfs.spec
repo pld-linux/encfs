@@ -12,6 +12,7 @@ URL:		http://arg0.net/users/vgough/encfs.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libfuse-devel >= 2.2
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pkgconfig
