@@ -2,16 +2,16 @@
 Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
-Version:	1.2.5
+Version:	1.3.0
 Release:	0.1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://arg0.net/users/vgough/download/%{name}-%{version}-1.tgz
-# Source0-md5:	f2d92d1f8e82f72cd0dd4cf9eea736c6
+# Source0-md5:	6e2547a1d667cbbee12e8a8d75dc7917
 URL:		http://arg0.net/users/vgough/encfs.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libfuse-devel >= 2.2
+BuildRequires:	libfuse-devel >= 2.5
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
