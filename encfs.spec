@@ -1,6 +1,6 @@
 # TODO: duplicated locales (es vs es_ES, fr vs fr_FR)
 Summary:	Encrypted pass-thru filesystem for Linux
-Summary(pl.UTF-8):   Zaszyfrowany system plików dla Linuksa
+Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
 Version:	1.3.1
 Release:	1
