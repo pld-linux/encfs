@@ -1,6 +1,6 @@
 # TODO: duplicated locales (es vs es_ES, fr vs fr_FR)
 Summary:	Encrypted pass-thru filesystem for Linux
-Summary(pl):	Zaszyfrowany system plików dla Linuksa
+Summary(pl.UTF-8):   Zaszyfrowany system plikÃ³w dla Linuksa
 Name:		encfs
 Version:	1.3.1
 Release:	1
@@ -27,13 +27,13 @@ written in userspace. EncFS encrypts all data and filenames in the
 filesystem and passes access through to the underlying filesystem.
 Similar to CFS except that it does not use NFS.
 
-%description -l pl
-EncFS jest implementacj± zaszyfrowanego systemu plików w przestrzeni
-u¿ytkownika przy u¿yciu FUSE. FUSE dostarcza modu³ j±dra Linuksa
-pozwalaj±cy na obs³ugê wirtualnych systemów plików w przestrzeni
-u¿ytkownika. EncFS szyfruje wszystkie dane oraz nazwy plików w
-systemie plików i przekazuje kontrolê do le¿±cego ni¿ej systemu
-plików. Jest podobny do CFS-a, ale nie u¿ywa NFS-a.
+%description -l pl.UTF-8
+EncFS jest implementacjÄ… zaszyfrowanego systemu plikÃ³w w przestrzeni
+uÅ¼ytkownika przy uÅ¼yciu FUSE. FUSE dostarcza moduÅ‚ jÄ…dra Linuksa
+pozwalajÄ…cy na obsÅ‚ugÄ™ wirtualnych systemÃ³w plikÃ³w w przestrzeni
+uÅ¼ytkownika. EncFS szyfruje wszystkie dane oraz nazwy plikÃ³w w
+systemie plikÃ³w i przekazuje kontrolÄ™ do leÅ¼Ä…cego niÅ¼ej systemu
+plikÃ³w. Jest podobny do CFS-a, ale nie uÅ¼ywa NFS-a.
 
 %prep
 %setup -q
