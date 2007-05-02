@@ -39,11 +39,11 @@ plików. Jest podobny do CFS-a, ale nie używa NFS-a.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+#%{__libtoolize}
+#%{__aclocal}
+#%{__autoconf}
+#%{__autoheader}
+#%{__automake}
 %configure \
 	--enable-debug=no
 %{__make}
