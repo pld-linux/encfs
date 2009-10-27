@@ -2,13 +2,14 @@
 Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
-Version:	1.3.2
+Version:	1.5
 Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://arg0.net/users/vgough/download/%{name}-%{version}-1.tgz
-# Source0-md5:	71482dbe0e158ee9ba522ae637337230
-URL:		http://arg0.net/users/vgough/encfs.html
+Source0:	http://encfs.googlecode.com/files/encfs-1.5-2.tgz
+# Source0-md5:	b07008545545b4a57cf2bf65f08a14ad
+Patch0:		%{name}-const-char.patch
+URL:		http://www.arg0.net/encfs
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libfuse-devel >= 2.5
@@ -37,16 +38,20 @@ plików. Jest podobny do CFS-a, ale nie używa NFS-a.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-#%{__libtoolize}
-#%{__aclocal}
-#%{__autoconf}
-#%{__autoheader}
-#%{__automake}
+# %{__libtoolize}
+# %{__aclocal}
+# %{__autoconf}
+# %{__autoheader}
+# %{__automake}
 %configure \
+  --with-boost-system=boost_system \
+  --with-boost-serialization=boost_serialization \
+  --with-boost-filesystem=boost_filesystem \
 	--enable-debug=no
-%{__make}
+%{__make} -j1 LDFLAGS=-lboost_system
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -56,6 +61,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # No public headers => no need for devel files
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+
+rm -rf $RPM_BUILD_ROOT/usr/share/locale/{fr_FR,pt_PT}
 
 %find_lang %{name}
 
@@ -69,5 +76,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/encfs*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/lib*.so*
 %{_mandir}/man1/*.1*
