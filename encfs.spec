@@ -19,7 +19,7 @@ BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pkgconfig
 BuildRequires:	rlog-devel
 Requires:	rlog >= 1.3
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 EncFS implements an encrypted filesystem in userspace using FUSE. FUSE
