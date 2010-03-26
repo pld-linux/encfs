@@ -12,6 +12,7 @@ Patch0:		%{name}-const-char.patch
 URL:		http://www.arg0.net/encfs
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	boost-devel >= 1.34.0
 BuildRequires:	libfuse-devel >= 2.5
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
