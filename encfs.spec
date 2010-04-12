@@ -63,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 # No public headers => no need for devel files
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
-rm -rf $RPM_BUILD_ROOT/usr/share/locale/{fr_FR,pt_PT}
+rm -rf $RPM_BUILD_ROOT/usr/share/locale/{fr_FR,pt_PT,de_DE,es_ES}
 
 %find_lang %{name}
 
