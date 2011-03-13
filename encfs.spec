@@ -3,7 +3,7 @@ Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
 Version:	1.7.4
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://encfs.googlecode.com/files/%{name}-%{version}.tgz
@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 # No public headers => no need for devel files
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{fr_FR,pt_PT,de_DE,es_ES}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{fr_FR,pt_PT,de_DE,es_ES,hu_HU}
 
 %find_lang %{name}
 
