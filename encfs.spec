@@ -6,18 +6,21 @@ Version:	1.7.4
 Release:	6
 License:	GPL v2
 Group:		Applications/System
+#Source0Download: http://www.arg0.net/encfs
 Source0:	http://encfs.googlecode.com/files/%{name}-%{version}.tgz
 # Source0-md5:	ac90cc10b2e9fc7e72765de88321d617
 URL:		http://www.arg0.net/encfs
-BuildRequires:	autoconf
-BuildRequires:	automake
+#BuildRequires:	autoconf >= 2.50
+#BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.34.0
+BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	libfuse-devel >= 2.5
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+#BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	perl-tools-pod
 BuildRequires:	pkgconfig
-BuildRequires:	rlog-devel
+BuildRequires:	rlog-devel >= 1.3
 Requires:	rlog >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -40,17 +43,13 @@ plików. Jest podobny do CFS-a, ale nie używa NFS-a.
 %setup -q
 
 %build
-# %{__libtoolize}
-# %{__aclocal}
-# %{__autoconf}
-# %{__autoheader}
-# %{__automake}
 %configure \
-  --with-boost-system=boost_system \
-  --with-boost-serialization=boost_serialization \
-  --with-boost-filesystem=boost_filesystem
+	--with-boost-filesystem=boost_filesystem \
+	--with-boost-serialization=boost_serialization \
+	--with-boost-system=boost_system
 
-%{__make} -j1 LDFLAGS="-lboost_system"
+%{__make} -j1 \
+	LDFLAGS="-lboost_system"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -59,9 +58,10 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # No public headers => no need for devel files
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{fr_FR,pt_PT,de_DE,es_ES,hu_HU}
+# duplicate of de,es,fr,hu,pt
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{de_DE,es_ES,fr_FR,hu_HU,pt_PT}
 
 %find_lang %{name}
 
@@ -74,6 +74,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
-%attr(755,root,root) %{_bindir}/encfs*
-%attr(755,root,root) %{_libdir}/lib*.so*
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_bindir}/encfs
+%attr(755,root,root) %{_bindir}/encfsctl
+%attr(755,root,root) %{_bindir}/encfssh
+%attr(755,root,root) %{_libdir}/libencfs.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libencfs.so.6
+%{_mandir}/man1/encfs.1*
+%{_mandir}/man1/encfsctl.1*
