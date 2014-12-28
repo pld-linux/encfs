@@ -13,7 +13,7 @@ URL:		http://www.arg0.net/encfs
 #BuildRequires:	autoconf >= 2.50
 #BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.34.0
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	libfuse-devel >= 2.5
 BuildRequires:	libstdc++-devel
 #BuildRequires:	libtool
