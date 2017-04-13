@@ -2,21 +2,17 @@
 Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
-Version:	1.7.4
-Release:	15
+Version:	1.9.1
+Release:	1
 License:	GPL v2
 Group:		Applications/System
-#Source0Download: http://www.arg0.net/encfs
-Source0:	http://encfs.googlecode.com/files/%{name}-%{version}.tgz
-# Source0-md5:	ac90cc10b2e9fc7e72765de88321d617
+Source0:	https://github.com/vgough/encfs/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	7cbf9cc3c5af49b46703ce6ba70d22a4
 URL:		http://www.arg0.net/encfs
-#BuildRequires:	autoconf >= 2.50
-#BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.34.0
 BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	libfuse-devel >= 2.5
 BuildRequires:	libstdc++-devel
-#BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	perl-tools-pod
 BuildRequires:	pkgconfig
@@ -43,41 +39,32 @@ plików. Jest podobny do CFS-a, ale nie używa NFS-a.
 %setup -q
 
 %build
-%configure \
-	--with-boost-filesystem=boost_filesystem \
-	--with-boost-serialization=boost_serialization \
-	--with-boost-system=boost_system
+mkdir build
+cd build
+%{cmake} .. \
+	-DBUILD_SHARED_LIBS:BOOL=OFF
 
-%{__make} -j1 \
-	LDFLAGS="-lboost_system"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# No public headers => no need for devel files
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
-
 # duplicate of de,es,fr,hu,pt
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{de_DE,es_ES,fr_FR,hu_HU,pt_PT}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{de_DE,es_ES,fr_FR,pt_PT}
 
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README
+%doc AUTHORS ChangeLog README.md
 %attr(755,root,root) %{_bindir}/encfs
 %attr(755,root,root) %{_bindir}/encfsctl
 %attr(755,root,root) %{_bindir}/encfssh
-%attr(755,root,root) %{_libdir}/libencfs.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libencfs.so.6
 %{_mandir}/man1/encfs.1*
 %{_mandir}/man1/encfsctl.1*
