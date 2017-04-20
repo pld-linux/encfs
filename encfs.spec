@@ -39,9 +39,9 @@ plików. Jest podobny do CFS-a, ale nie używa NFS-a.
 %setup -q
 
 %build
-mkdir build
+install -d build
 cd build
-%{cmake} .. \
+%cmake .. \
 	-DBUILD_SHARED_LIBS:BOOL=OFF
 
 %{__make}
@@ -53,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # duplicate of de,es,fr,hu,pt
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{de_DE,es_ES,fr_FR,pt_PT}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{de_DE,es_ES,fr_FR,pt_PT}
 
 %find_lang %{name}
 
