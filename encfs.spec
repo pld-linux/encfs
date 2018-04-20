@@ -2,12 +2,12 @@
 Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
-Version:	1.9.1
+Version:	1.9.4
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://github.com/vgough/encfs/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	7cbf9cc3c5af49b46703ce6ba70d22a4
+# Source0-md5:	28e6c0a9dbfb26b1e53f491bff4e707b
 URL:		http://www.arg0.net/encfs
 BuildRequires:	boost-devel >= 1.34.0
 BuildRequires:	gettext-tools >= 0.17
@@ -68,3 +68,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/encfssh
 %{_mandir}/man1/encfs.1*
 %{_mandir}/man1/encfsctl.1*
+%{_mandir}/man1/encfssh.1*
