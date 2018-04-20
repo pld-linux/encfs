@@ -1,4 +1,5 @@
 # TODO: duplicated locales (es vs es_ES, fr vs fr_FR)
+%bcond_without	tests
 Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
@@ -45,6 +46,11 @@ cd build
 	-DBUILD_SHARED_LIBS:BOOL=OFF
 
 %{__make}
+
+%if %{with tests}
+%{__make} unittests
+%{__make} test
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
