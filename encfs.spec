@@ -4,7 +4,7 @@ Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
 Version:	1.9.5
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://github.com/vgough/encfs/archive/v%{version}/%{name}-%{version}.tar.gz
