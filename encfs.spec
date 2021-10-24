@@ -4,7 +4,7 @@ Summary:	Encrypted pass-thru filesystem for Linux
 Summary(pl.UTF-8):	Zaszyfrowany system plików dla Linuksa
 Name:		encfs
 Version:	1.9.5
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://github.com/vgough/encfs/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -42,6 +42,7 @@ plików. Jest podobny do CFS-a, ale nie używa NFS-a.
 %build
 install -d build
 cd build
+export CXXFLAGS="%{rpmcxxflags} -DOPENSSL_NO_BF"
 %cmake .. \
 	-DBUILD_SHARED_LIBS:BOOL=OFF
 
